@@ -1,1 +1,256 @@
-
+openapi: 3.0.0
+x-stoplight:
+  id: 867vdz3cyydne
+info:
+  title: todo
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /todos:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TodoObj'
+              examples:
+                Example 1:
+                  value:
+                    - id: string
+                      title: string
+                      content: string
+                      price: 0
+                      updated_at: string
+                      list:
+                        - title: string
+                          content: string
+                          price: 0
+                          updated_at: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: get-todos
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: title
+        - schema:
+            type: string
+          in: query
+          name: content
+        - schema:
+            type: number
+          in: query
+          name: price
+        - schema:
+            type: string
+          in: query
+          name: updated_at
+    parameters: []
+    post:
+      summary: ''
+      operationId: post-todos
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Todo'
+            examples:
+              Example 1:
+                value:
+                  title: string
+                  content: string
+                  price: 0
+                  updated_at: string
+    put:
+      summary: ''
+      operationId: put-todos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                title:
+                  type: string
+                content:
+                  type: string
+                price:
+                  type: number
+                updated_at:
+                  type: string
+            examples:
+              Example 1:
+                value:
+                  id: string
+                  title: string
+                  content: string
+                  price: 0
+                  updated_at: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: ''
+      operationId: delete-todos
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+      parameters: []
+components:
+  schemas:
+    Todo:
+      title: Todo
+      x-stoplight:
+        id: cs46f7ilzxsz7
+      type: object
+      x-examples:
+        Example 1:
+          title: string
+          content: string
+          price: 0
+          '': string
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        price:
+          type: number
+        updated_at:
+          type: string
+    Error:
+      title: Error
+      x-stoplight:
+        id: buwakoncyce9i
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+    TodoObj:
+      title: TodoObj
+      x-stoplight:
+        id: m8kxgxyhk7t3k
+      type: object
+      x-examples:
+        Example 1:
+          id: string
+          title: string
+          content: string
+          price: 0
+          updated_at: string
+          list:
+            - title: string
+              content: string
+              price: 0
+              updated_at: string
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        price:
+          type: number
+        updated_at:
+          type: string
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Todo'
+      required:
+        - id
+        - title
