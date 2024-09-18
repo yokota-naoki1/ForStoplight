@@ -1,0 +1,146 @@
+openapi: 3.0.0
+x-stoplight:
+  id: d90mtl0jh207w
+info:
+  title: init
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /init:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Init'
+              examples:
+                Example 1:
+                  value:
+                    tagTypeList:
+                      - tagType: string
+                        tagList:
+                          - string
+                    some_type_list:
+                      - something_type: string
+                        somthing_list:
+                          - string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Example 1:
+                  value:
+                    id: string
+                    message: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Example 1:
+                  value:
+                    id: string
+                    message: string
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Example 1:
+                  value:
+                    id: string
+                    message: string
+      operationId: get-init
+components:
+  schemas:
+    Init:
+      title: Init
+      x-stoplight:
+        id: fjqx6hhh73o8s
+      type: object
+      x-examples:
+        Example 1:
+          tagTypeList:
+            - tagType: string
+              tagList:
+                - string
+          some_type_list:
+            - something_type: string
+              somthing_list:
+                - string
+      properties:
+        tagTypeList:
+          $ref: '#/components/schemas/TagTypeList'
+        some_type_list:
+          $ref: '#/components/schemas/SomeTypeList'
+    TagTypeList:
+      title: TagList
+      x-stoplight:
+        id: 9826635a9558d
+      type: array
+      x-examples:
+        Example 1:
+          - tagType: string
+            tagList:
+              - string
+      description: コンボボックスを取得
+      items:
+        type: object
+        properties:
+          tagType:
+            type: string
+          tagList:
+            type: array
+            items:
+              type: string
+        required:
+          - tagType
+          - tagList
+    SomeTypeList:
+      title: SomeList
+      x-stoplight:
+        id: aceda13b9afe3
+      type: array
+      items:
+        type: object
+        properties:
+          something_type:
+            type: string
+          somthing_list:
+            type: array
+            items:
+              type: string
+      x-examples:
+        Example 1:
+          - something_type: string
+            somthing_list:
+              - string
+    Error:
+      title: Error
+      x-stoplight:
+        id: 8oxs5zspw0z8c
+      type: object
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+      required:
+        - id
+        - message
+      x-examples:
+        Example 1:
+          id: string
+          message: string
