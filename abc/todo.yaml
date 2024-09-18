@@ -9,7 +9,7 @@ servers:
 paths:
   /todos:
     get:
-      summary: Your GET endpoint
+      summary: Todo一覧取得
       tags: []
       responses:
         '200':
@@ -19,20 +19,29 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/TodoObj'
+                  $ref: '#/components/schemas/TodoList'
               examples:
                 Example 1:
                   value:
-                    - id: string
+                    - parentId: string
+                      id: string
                       title: string
-                      content: string
+                      note: string
                       price: 0
-                      updated_at: string
+                      camelType: string
+                      camelItem: string
+                      updatedAt: string
+                      updatedBy: string
                       list:
-                        - title: string
-                          content: string
+                        - parentId: string
+                          id: string
+                          title: string
+                          note: string
                           price: 0
-                          updated_at: string
+                          camelType: string
+                          camelItem: string
+                          updatedAt: string
+                          updatedBy: string
         '400':
           description: Bad Request
           content:
@@ -68,10 +77,23 @@ paths:
         - schema:
             type: string
           in: query
-          name: updated_at
+          name: camelType
+        - schema:
+            type: string
+          in: query
+          name: camelItem
+        - schema:
+            type: string
+          in: query
+          name: updatedAt
+        - schema:
+            type: string
+          in: query
+          name: updatedBy
+      description: ''
     parameters: []
     post:
-      summary: ''
+      summary: Todo新規追加
       operationId: post-todos
       responses:
         '200':
@@ -98,41 +120,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Todo'
+              $ref: '#/components/schemas/PostTodo'
             examples:
               Example 1:
                 value:
                   title: string
-                  content: string
+                  note: string
                   price: 0
-                  updated_at: string
+                  updatedBy: string
     put:
-      summary: ''
+      summary: Todo編集
       operationId: put-todos
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: string
-                title:
-                  type: string
-                content:
-                  type: string
-                price:
-                  type: number
-                updated_at:
-                  type: string
+              $ref: '#/components/schemas/PutTodo'
             examples:
               Example 1:
                 value:
                   id: string
                   title: string
-                  content: string
+                  note: string
                   price: 0
-                  updated_at: string
+                  updatedBy: string
       responses:
         '200':
           description: OK
@@ -155,7 +166,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
-      summary: ''
+      summary: Todo削除
       operationId: delete-todos
       responses:
         '200':
@@ -182,33 +193,161 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: string
+              $ref: '#/components/schemas/DeleteTodo'
+            examples:
+              Example 1:
+                value:
+                  id: string
+                  updatedBy: string
       parameters: []
 components:
   schemas:
-    Todo:
-      title: Todo
+    TodoList:
+      title: TodoList
       x-stoplight:
-        id: cs46f7ilzxsz7
+        id: b77b735612d33
+      type: object
+      x-examples:
+        Example 1:
+          parentId: string
+          id: string
+          title: string
+          note: string
+          price: 0
+          camelType: string
+          camelItem: string
+          updatedAt: string
+          updatedBy: string
+          list:
+            - parentId: string
+              id: string
+              title: string
+              note: string
+              price: 0
+              camelType: string
+              camelItem: string
+              updatedAt: string
+              updatedBy: string
+      properties:
+        parentId:
+          type: string
+        id:
+          type: string
+        title:
+          type: string
+        note:
+          type: string
+        price:
+          type: number
+        camelType:
+          type: string
+        camelItem:
+          type: string
+        updatedAt:
+          type: string
+        updatedBy:
+          type: string
+        list:
+          type: array
+          items:
+            type: object
+            properties:
+              parentId:
+                type: string
+              id:
+                type: string
+              title:
+                type: string
+              note:
+                type: string
+              price:
+                type: number
+              camelType:
+                type: string
+              camelItem:
+                type: string
+              updatedAt:
+                type: string
+              updatedBy:
+                type: string
+            required:
+              - parentId
+              - id
+              - title
+              - updatedAt
+              - updatedBy
+      required:
+        - parentId
+        - id
+        - title
+        - updatedAt
+        - updatedBy
+    PostTodo:
+      title: PostTodo
+      x-stoplight:
+        id: uqgii3tmkkahi
       type: object
       x-examples:
         Example 1:
           title: string
-          content: string
+          note: string
           price: 0
-          '': string
       properties:
         title:
           type: string
-        content:
+        note:
           type: string
         price:
           type: number
-        updated_at:
+        updatedBy:
           type: string
+      required:
+        - title
+        - updatedBy
+    PutTodo:
+      title: PutTodo
+      x-stoplight:
+        id: 05wt3z3w2hfj6
+      type: object
+      x-examples:
+        Example 1:
+          id: string
+          title: string
+          note: string
+          price: 0
+          updatedBy: string
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        note:
+          type: string
+        price:
+          type: number
+        updatedBy:
+          type: string
+      required:
+        - id
+        - title
+        - updatedBy
+    DeleteTodo:
+      title: DeleteTodo
+      x-stoplight:
+        id: 2wijya0vcc5yp
+      type: object
+      x-examples:
+        Example 1:
+          id: string
+          updatedBy: string
+      properties:
+        id:
+          type: string
+        updatedBy:
+          type: string
+      required:
+        - id
+        - updatedBy
     Error:
       title: Error
       x-stoplight:
@@ -219,38 +358,6 @@ components:
           type: string
         message:
           type: string
-    TodoObj:
-      title: TodoObj
-      x-stoplight:
-        id: m8kxgxyhk7t3k
-      type: object
-      x-examples:
-        Example 1:
-          id: string
-          title: string
-          content: string
-          price: 0
-          updated_at: string
-          list:
-            - title: string
-              content: string
-              price: 0
-              updated_at: string
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        content:
-          type: string
-        price:
-          type: number
-        updated_at:
-          type: string
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/Todo'
       required:
         - id
-        - title
+        - message
