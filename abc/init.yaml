@@ -21,14 +21,15 @@ paths:
               examples:
                 Example 1:
                   value:
-                    tagTypeList:
-                      - tagType: string
-                        tagList:
-                          - string
-                    some_type_list:
-                      - something_type: string
-                        somthing_list:
-                          - string
+                    listA:
+                      - categoryType: 私用
+                        categoryItem:
+                          - 買い物
+                          - 娯楽
+                      - categoryType: 社用
+                        categoryItem:
+                          - 会議
+                          - 経費計算
         '400':
           description: Bad Request
           content:
@@ -63,6 +64,7 @@ paths:
                     id: string
                     message: string
       operationId: get-init
+      description: ''
 components:
   schemas:
     Init:
@@ -72,61 +74,47 @@ components:
       type: object
       x-examples:
         Example 1:
-          tagTypeList:
-            - tagType: string
-              tagList:
-                - string
-          some_type_list:
-            - something_type: string
-              somthing_list:
-                - string
+          listA:
+            - categoryType: 私用
+              categoryItem:
+                - 買い物
+                - 娯楽
+            - categoryType: 社用
+              categoryItem:
+                - 会議
+                - 経費計算
+      description: getのレスポンスボディ
       properties:
-        tagTypeList:
-          $ref: '#/components/schemas/TagTypeList'
-        some_type_list:
-          $ref: '#/components/schemas/SomeTypeList'
-    TagTypeList:
-      title: TagList
+        listA:
+          $ref: '#/components/schemas/CategoryList'
+    CategoryList:
+      title: CategoryList
       x-stoplight:
-        id: 9826635a9558d
+        id: mypq8k5nidrth
       type: array
-      x-examples:
-        Example 1:
-          - tagType: string
-            tagList:
-              - string
-      description: コンボボックスを取得
       items:
         type: object
         properties:
-          tagType:
+          categoryType:
             type: string
-          tagList:
+          categoryItem:
             type: array
             items:
               type: string
         required:
-          - tagType
-          - tagList
-    SomeTypeList:
-      title: SomeList
-      x-stoplight:
-        id: aceda13b9afe3
-      type: array
-      items:
-        type: object
-        properties:
-          something_type:
-            type: string
-          somthing_list:
-            type: array
-            items:
-              type: string
+          - categoryType
+          - categoryItem
       x-examples:
         Example 1:
-          - something_type: string
-            somthing_list:
-              - string
+          - categoryType: 私用
+            categoryItem:
+              - 買い物
+              - 娯楽
+          - categoryType: 社用
+            categoryItem:
+              - 会議
+              - 経費計算
+      description: カテゴリーリストの型
     Error:
       title: Error
       x-stoplight:
@@ -144,3 +132,4 @@ components:
         Example 1:
           id: string
           message: string
+  examples: {}
