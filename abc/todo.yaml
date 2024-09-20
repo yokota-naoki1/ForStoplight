@@ -28,8 +28,8 @@ paths:
                       title: string
                       note: string
                       price: 0
-                      camelType: string
-                      camelItem: string
+                      categoryType: string
+                      categoryItem: string
                       updatedAt: string
                       updatedBy: string
                       list:
@@ -38,8 +38,45 @@ paths:
                           title: string
                           note: string
                           price: 0
-                          camelType: string
-                          camelItem: string
+                          categoryType: string
+                          categoryItem: string
+                          updatedAt: string
+                          updatedBy: string
+                        - parentId: string
+                          id: string
+                          title: string
+                          note: string
+                          price: 0
+                          categoryType: string
+                          categoryItem: string
+                          updatedAt: string
+                          updatedBy: string
+                    - parentId: string
+                      id: string
+                      title: string
+                      note: string
+                      price: 0
+                      categoryType: string
+                      categoryItem: string
+                      updatedAt: string
+                      updatedBy: string
+                      list:
+                        - parentId: string
+                          id: string
+                          title: string
+                          note: string
+                          price: 0
+                          categoryType: string
+                          categoryItem: string
+                          updatedAt: string
+                          updatedBy: string
+                        - parentId: string
+                          id: string
+                          title: string
+                          note: string
+                          price: 0
+                          categoryType: string
+                          categoryItem: string
                           updatedAt: string
                           updatedBy: string
         '400':
@@ -69,7 +106,7 @@ paths:
         - schema:
             type: string
           in: query
-          name: content
+          name: note
         - schema:
             type: number
           in: query
@@ -77,11 +114,11 @@ paths:
         - schema:
             type: string
           in: query
-          name: camelType
+          name: categoryType
         - schema:
             type: string
           in: query
-          name: camelItem
+          name: categoryItem
         - schema:
             type: string
           in: query
@@ -127,6 +164,8 @@ paths:
                   title: string
                   note: string
                   price: 0
+                  categoryType: string
+                  categoryItem: string
                   updatedBy: string
     put:
       summary: Todo編集
@@ -143,6 +182,8 @@ paths:
                   title: string
                   note: string
                   price: 0
+                  categoryType: string
+                  categoryItem: string
                   updatedBy: string
       responses:
         '200':
@@ -214,8 +255,8 @@ components:
           title: string
           note: string
           price: 0
-          camelType: string
-          camelItem: string
+          categoryType: string
+          categoryItem: string
           updatedAt: string
           updatedBy: string
           list:
@@ -224,8 +265,8 @@ components:
               title: string
               note: string
               price: 0
-              camelType: string
-              camelItem: string
+              categoryType: string
+              categoryItem: string
               updatedAt: string
               updatedBy: string
       properties:
@@ -239,9 +280,9 @@ components:
           type: string
         price:
           type: number
-        camelType:
+        categoryType:
           type: string
-        camelItem:
+        categoryItem:
           type: string
         updatedAt:
           type: string
@@ -262,9 +303,9 @@ components:
                 type: string
               price:
                 type: number
-              camelType:
+              categoryType:
                 type: string
-              camelItem:
+              categoryItem:
                 type: string
               updatedAt:
                 type: string
@@ -282,6 +323,26 @@ components:
         - title
         - updatedAt
         - updatedBy
+    SearchParams:
+      title: SearchParams
+      x-stoplight:
+        id: zhx0ce6nm0hdp
+      type: object
+      description: Todoリストをgetするときのquery typescriptで使うための項目
+      x-examples:
+        Example 1:
+          title: string
+          categoryType: string
+          categoryItem: string
+      properties:
+        title:
+          type: string
+        categoryType:
+          type: string
+        categoryItem:
+          type: string
+      required:
+        - title
     PostTodo:
       title: PostTodo
       x-stoplight:
@@ -292,6 +353,10 @@ components:
           title: string
           note: string
           price: 0
+          updatedBy: string
+          categoryType: string
+          categoryItem:
+            - string
       properties:
         title:
           type: string
@@ -299,6 +364,11 @@ components:
           type: string
         price:
           type: number
+          nullable: true
+        categoryType:
+          type: string
+        categoryItem:
+          type: string
         updatedBy:
           type: string
       required:
@@ -315,6 +385,8 @@ components:
           title: string
           note: string
           price: 0
+          categoryType: string
+          categoryItem: string
           updatedBy: string
       properties:
         id:
@@ -325,6 +397,10 @@ components:
           type: string
         price:
           type: number
+        categoryType:
+          type: string
+        categoryItem:
+          type: string
         updatedBy:
           type: string
       required:
@@ -361,3 +437,9 @@ components:
       required:
         - id
         - message
+      x-examples:
+        Example 1:
+          id: string
+          message: string
+  responses: {}
+  parameters: {}

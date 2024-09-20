@@ -133,3 +133,4 @@ components:
           id: string
           message: string
   examples: {}
+  responses: {}
