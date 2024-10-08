@@ -32,44 +32,7 @@ paths:
                       categoryItem: string
                       updatedAt: string
                       updatedBy: string
-                      list:
-                        - parentId: string
-                          id: string
-                          title: string
-                          note: string
-                          price: 0
-                          categoryType: string
-                          categoryItem: string
-                          updatedAt: string
-                          updatedBy: string
-                        - parentId: string
-                          id: string
-                          title: string
-                          note: string
-                          price: 0
-                          categoryType: string
-                          categoryItem: string
-                          updatedAt: string
-                          updatedBy: string
-                    - parentId: string
-                      id: string
-                      title: string
-                      note: string
-                      price: 0
-                      categoryType: string
-                      categoryItem: string
-                      updatedAt: string
-                      updatedBy: string
-                      list:
-                        - parentId: string
-                          id: string
-                          title: string
-                          note: string
-                          price: 0
-                          categoryType: string
-                          categoryItem: string
-                          updatedAt: string
-                          updatedBy: string
+                      subRows:
                         - parentId: string
                           id: string
                           title: string
@@ -122,7 +85,11 @@ paths:
         - schema:
             type: string
           in: query
-          name: updatedAt
+          name: date1
+        - schema:
+            type: string
+          in: query
+          name: date2
         - schema:
             type: string
           in: query
@@ -178,7 +145,7 @@ paths:
             examples:
               Example 1:
                 value:
-                  id: string
+                  parentId: string
                   title: string
                   note: string
                   price: 0
@@ -259,7 +226,7 @@ components:
           categoryItem: string
           updatedAt: string
           updatedBy: string
-          list:
+          subRows:
             - parentId: string
               id: string
               title: string
@@ -280,6 +247,7 @@ components:
           type: string
         price:
           type: number
+          nullable: true
         categoryType:
           type: string
         categoryItem:
@@ -288,7 +256,7 @@ components:
           type: string
         updatedBy:
           type: string
-        list:
+        subRows:
           type: array
           items:
             type: object
@@ -303,6 +271,7 @@ components:
                 type: string
               price:
                 type: number
+                nullable: true
               categoryType:
                 type: string
               categoryItem:
@@ -318,7 +287,6 @@ components:
               - updatedAt
               - updatedBy
       required:
-        - parentId
         - id
         - title
         - updatedAt
@@ -334,12 +302,22 @@ components:
           title: string
           categoryType: string
           categoryItem: string
+          price: 0
+          date1: string
+          date2: string
       properties:
         title:
           type: string
         categoryType:
           type: string
         categoryItem:
+          type: string
+        price:
+          type: number
+          nullable: true
+        date1:
+          type: string
+        date2:
           type: string
       required:
         - title
@@ -353,10 +331,9 @@ components:
           title: string
           note: string
           price: 0
-          updatedBy: string
           categoryType: string
-          categoryItem:
-            - string
+          categoryItem: string
+          updatedBy: string
       properties:
         title:
           type: string
@@ -381,7 +358,7 @@ components:
       type: object
       x-examples:
         Example 1:
-          id: string
+          parentId: string
           title: string
           note: string
           price: 0
@@ -389,7 +366,7 @@ components:
           categoryItem: string
           updatedBy: string
       properties:
-        id:
+        parentId:
           type: string
         title:
           type: string
@@ -397,6 +374,7 @@ components:
           type: string
         price:
           type: number
+          nullable: true
         categoryType:
           type: string
         categoryItem:
@@ -404,7 +382,7 @@ components:
         updatedBy:
           type: string
       required:
-        - id
+        - parentId
         - title
         - updatedBy
     DeleteTodo:
